@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang=en>
+<meta charset=utf-8>
+<link rel=stylesheet href=style.css>
+<title>2p game viz</title>
+
+<div>
+  <input type=range min=1 max=6 step=1 value=1 id=num-displays>
+</div>
+
+<div id=displays></div>
+
+<template id=t-normal>
+  <svg class=normal width=340 height=340 viewBox="0 0 340 340">
+    <g transform="translate(20, 20)">
+      <text x=0 y=125 class="p1 c1 label">U</text>
+      <text x=0 y=225 class="p1 d1 label">D</text>
+      <text x=125 y=0 class="p2 c2 label">L</text>
+      <text x=225 y=0 class="p2 d2 label">R</text>
+
+      <rect class=rcell x=45 y=45 width=110 height=110 />
+      <rect class=rcell x=155 y=45 width=110 height=110 />
+      <rect class=rcell x=45 y=155 width=110 height=110 />
+      <rect class=rcell x=155 y=155 width=110 height=110 />
+
+      <circle cx=75  cy=125 class="utility p1" />
+      <circle cx=125 cy=75  class="utility p2" />
+      <circle cx=175 cy=125 class="utility p1" />
+      <circle cx=225 cy=75  class="utility p2" />
+      <circle cx=75  cy=225 class="utility p1" />
+      <circle cx=125 cy=175 class="utility p2" />
+      <circle cx=175 cy=225 class="utility p1" />
+      <circle cx=225 cy=175 class="utility p2" />
+    </g>
+  </svg>
+</template>
+
+<template id=t-order>
+  <svg class=order width=340 height=340 viewBox="0 0 340 340">
+    <g transform="translate(20, 20)">
+      <text x=0 y=125 class="p1 c1 label">U</text>
+      <text x=0 y=225 class="p1 d1 label">D</text>
+      <text x=125 y=0 class="p2 c2 label">L</text>
+      <text x=225 y=0 class="p2 d2 label">R</text>
+
+      <path class="order-path p1" marker-end="url(#head1t)"/>
+      <path class="order-path p2" marker-end="url(#head2t)"/>
+    </g>
+  </svg>
+</template>
+
+<template id=t-table>
+  <table class=number-table>
+    <thead><tr><th><th class=p2>L<th class=p2>R</thead>
+            <tr><th class=p1>U<td><span class="utility p1"></span><span class="utility p2"></span><td><span class="utility p1"></span><span class="utility p2"></span>
+            <tr><th class=p1>D<td><span class="utility p1"></span><span class="utility p2"></span><td><span class="utility p1"></span><span class="utility p2"></span>
+  </table>
+</template>
+
+<svg hidden>
+  <defs>
+    <marker id='head1'
+      viewBox="0 0 10 10" refX="10" refY="5"
+      markerUnits="strokeWidth"
+      markerWidth="4" markerHeight="3"
+      orient="auto" fill="red">
+      <path d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+    <marker id='head2'
+      viewBox="0 0 10 10" refX="10" refY="5"
+      markerUnits="strokeWidth"
+      markerWidth="4" markerHeight="3"
+      orient="auto" fill="blue">
+      <path d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+    <marker id='head1t'
+      viewBox="0 0 10 10" refX="0" refY="5"
+      markerUnits="strokeWidth"
+      markerWidth="4" markerHeight="3"
+      orient="auto" fill="red">
+      <path d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+    <marker id='head2t'
+      viewBox="0 0 10 10" refX="0" refY="5"
+      markerUnits="strokeWidth"
+      markerWidth="4" markerHeight="3"
+      orient="auto" fill="blue">
+      <path d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs>
+</svg>
+
+<template id=t-dynamics>
+  <svg class=dynamics width=240 height=240>
+    <g transform="translate(20, 20)">
+      <line class="p2 axis" x1=-20 x2=200 y1=200 y2=200 />
+      <line class="p1 axis" x1=0 x2=0 y1=0 y2=240 />
+      <line class="dynamic p1 c" marker-end="url(#head1)" />
+      <line class="dynamic p1 d" marker-end="url(#head1)" />
+      <line class="dynamic p2 c" marker-end="url(#head2)" />
+      <line class="dynamic p2 d" marker-end="url(#head2)" />
+
+      <g class=outcome transform="translate(50, 50)">
+        <circle r=15 />
+        <text class="outcome-text"><tspan class=p1>U</tspan><tspan class=p2>L</tspan></text>
+      </g>
+      <g class=outcome transform="translate(150, 50)">
+        <circle r=15 />
+        <text class="outcome-text"><tspan class=p1>U</tspan><tspan class=p2>R</tspan></text>
+      </g>
+      <g class=outcome transform="translate(50, 150)">
+        <circle r=15 />
+        <text class="outcome-text"><tspan class=p1>D</tspan><tspan class=p2>L</tspan></text>
+      </g>
+      <g class=outcome transform="translate(150, 150)">
+        <circle r=15 />
+        <text class="outcome-text"><tspan class=p1>D</tspan><tspan class=p2>R</tspan></text>
+      </g>
+    </g>
+  </svg>
+</template>
+
+<template id=t-categories>
+  <dl class=categories>
+    <dt>Name <dd><select class=name></select>
+    <dt>Zero-sum <dd class=zero-sum> No
+  </dl>
+</template>
+
+<template id=t-field>
+  <canvas width=200 height=200></canvas>
+</template>
+
+<script src=d3.v3.js></script>
+<script src=Bacon.js></script>
+<script src=twogame.js></script>

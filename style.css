@@ -1,0 +1,133 @@
+#displays {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+td.ne {
+  background-color: #ddd
+}
+
+.rcell {
+  fill: transparent
+}
+
+.rcell.ne {
+  fill: #ddd
+}
+
+input {
+  cursor: pointer;
+}
+
+.p1 {
+  color: red;
+  fill: red;
+}
+
+.p2 {
+  color: blue;
+  fill: blue;
+}
+
+line.p1, path.p1 {
+  fill: none;
+  stroke: red;
+}
+
+line.p2, path.p2 {
+  fill: none;
+  stroke: blue;
+}
+
+.dynamic {
+  stroke-width: 10;
+}
+
+.order-path {
+  stroke-width: 6px;
+}
+
+.axis {
+  stroke: black;
+  stroke-width: 3px;
+  shape-rendering: crispEdges;
+}
+
+.normal, .order {
+  height: 240px;
+  width: 240px;
+}
+
+text.label {
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-size: 18pt
+}
+
+.outcome-text {
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-size: 13pt
+}
+
+.outcome > circle {
+  fill: white;
+  stroke: gray;
+  stroke-width: 1px
+}
+
+.outcome {
+  cursor: pointer;
+}
+
+.utility {
+  cursor: ns-resize
+}
+
+body.dragging {
+  cursor: ns-resize
+}
+
+body.moving {
+  cursor: pointer
+}
+
+.dwrap {
+  position: relative
+}
+
+.dwabs {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+template {
+  display: none
+}
+
+svg {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.number-table {
+  font-size: 23pt;
+  border-spacing: 0
+}
+
+.number-table td, .number-table th {
+  padding: 0 0.25em;
+  margin: 0;
+  border: 1px solid #eee;
+}
+
+span.p1 {
+  vertical-align: sub
+}
+
+span.p2 {
+  vertical-align: super
+}
