@@ -119,7 +119,9 @@ const TYPES = (.map -> new DisplayType it.0, it.1, it.2, it.3) [] =
         @select-all \.utility .data u .text df
         ne = nash-equilibria u[0 2 4 6], u[1 3 5 7], 2 2
         @select-all \td .classed \ne (, i) -> i in ne
-      {}
+      table: (duration) !->
+        @select-all \.utility
+          .call drag-normal
   * \normal     'Normal Form'
       (duration) !->
         @select-all \.utility .data u
@@ -309,7 +311,7 @@ bind-type = !(type, display) ->
     ..__type__ = TYPE[type]
     while ..first-child?
       ..remove-child ..first-child
-    ..append-child $("t-#type")content.cloneNode true
+    ..append-child $("t-#type")content.clone-node true
     TYPE[type].bind.call d3.select ..first-element-child
 
 init-type = !(type, display) ->

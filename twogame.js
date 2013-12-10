@@ -110,7 +110,11 @@ TYPES = function(it){
       this.selectAll('td').classed('ne', function(arg$, i){
         return in$(i, ne);
       });
-    }, {}
+    }, {
+      table: function(duration){
+        this.selectAll('.utility').call(dragNormal);
+      }
+    }
   ], [
     'normal', 'Normal Form', function(duration){
       var x$, ne;
